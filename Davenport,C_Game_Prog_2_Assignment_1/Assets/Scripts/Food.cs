@@ -46,8 +46,7 @@ public class Food : MonoBehaviour
         }
     }
 
-
-    void SpawnFood()
+       void SpawnFood()
     {
 
         Bounds bounds = arenaCollider.bounds;           //declare spawn bounds within arena collider boundary
@@ -68,14 +67,6 @@ public class Food : MonoBehaviour
         StartCoroutine(DestroyFoodAfterTime(newFood, 7f));                //attempt to make food profabs expire after set interval (does not work)
     }
 
-    void OnTriggerEnter2D(Collider2D collision)                            //on collision with food
-    {
-        if (collision.gameObject.CompareTag("Food"))
-        {
-            addTailSegment();                                             //Add tail segment prefab
-            Destroy(collision.gameObject);                                //destroy existing food object
-        }
-    }
 
     IEnumerator DestroyFoodAfterTime(GameObject food, float delay)        //set timer to despawn food Prefabs
     {

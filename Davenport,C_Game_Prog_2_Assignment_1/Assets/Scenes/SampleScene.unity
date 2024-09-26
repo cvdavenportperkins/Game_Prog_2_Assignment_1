@@ -794,6 +794,7 @@ GameObject:
   - component: {fileID: 560843202}
   - component: {fileID: 560843204}
   - component: {fileID: 560843205}
+  - component: {fileID: 560843206}
   m_Layer: 0
   m_Name: Arena
   m_TagString: Arena
@@ -920,6 +921,33 @@ MonoBehaviour:
   tailPrefab: {fileID: 4846969517735565608, guid: 76a2d9523a2e28d488e82041e0480862, type: 3}
   tailParent: {fileID: 8886873}
   bounceBackDistance: 0.5
+--- !u!50 &560843206
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 560843201}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &669432522
 GameObject:
   m_ObjectHideFlags: 0
@@ -1435,6 +1463,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3125799041029008213, guid: 687c49cf6117dd049b3744b8f1225e33, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3125799041029008213, guid: 687c49cf6117dd049b3744b8f1225e33, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3125799041029008213, guid: 687c49cf6117dd049b3744b8f1225e33, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3125799041029008213, guid: 687c49cf6117dd049b3744b8f1225e33, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6675127816530862335, guid: 687c49cf6117dd049b3744b8f1225e33, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
