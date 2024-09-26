@@ -15,8 +15,8 @@ public class Food : MonoBehaviour
     private CircleCollider2D arenaCollider;
     public int maxFoodInstances = 4;
     public TextMeshPro gameOverText;
-   
-    
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -45,11 +45,11 @@ public class Food : MonoBehaviour
             gameOverText.gameObject.SetActive(true);
         }
     }
-       
+
 
     void SpawnFood()
     {
-       
+
         Bounds bounds = arenaCollider.bounds;           //declare spawn bounds within arena collider boundary
         Vector2 foodPosition;
 
@@ -62,10 +62,19 @@ public class Food : MonoBehaviour
 
 
         GameObject newFood = Instantiate(foodPrefab, foodPosition, Quaternion.identity);    //instantiate food prefab  
-        
+
         foodInstances.Add(newFood);                                                         //add new food instance to list object
-       
+
         StartCoroutine(DestroyFoodAfterTime(newFood, 7f));                //attempt to make food profabs expire after set interval (does not work)
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)                            //on collision with food
+    {
+        if (collision.gameObject.CompareTag("Food"))
+        {
+            addTailSegment();                                             //Add tail segment prefab
+            Destroy(collision.gameObject);                                //destroy existing food object
+        }
     }
 
     IEnumerator DestroyFoodAfterTime(GameObject food, float delay)        //set timer to despawn food Prefabs
@@ -74,9 +83,9 @@ public class Food : MonoBehaviour
         if (foodInstances.Contains(food))
         {
             foodInstances.Remove(food);
-            
+
             Destroy(food);
         }
     }
-    
+
 }
