@@ -31,6 +31,7 @@ public class GoalCollision : MonoBehaviour
             }
 
             playerCollision.tailSegments.Clear();
+            playerCollision.hasTail = false;
         }
     }
 

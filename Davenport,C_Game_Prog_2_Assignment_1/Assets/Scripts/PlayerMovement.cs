@@ -5,11 +5,12 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 
-    public float moveSpeed = 7f;
+    public float moveSpeed = 5f;
     public Vector2 vel = new Vector2(0,0);
+    public PlayerCollision playerCollision;
 
     // Start is called before the first frame update
-    void Start()
+    void Start()                 
     {
          
     }
@@ -43,7 +44,11 @@ public class PlayerMovement : MonoBehaviour
             transform.Translate(vel * Time.deltaTime);       
         }
 
-        
+        if (playerCollision.hasTail == true)
+        {
+
+            moveSpeed = 8;
+        }
     
     }
 }

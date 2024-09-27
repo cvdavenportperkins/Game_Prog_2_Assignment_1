@@ -9,7 +9,8 @@ public class PlayerCollision : MonoBehaviour
     public List<GameObject> tailSegments = new List<GameObject>();
     public GameObject tailPrefab;
     public Transform tailParent;
-    public float bounceBackDistance = 0.5f;
+    public float bounceBackDistance = 3f;
+    public bool hasTail;
 
     private Rigidbody2D rb;
     private Vector2 lastMoveDirection;
@@ -20,6 +21,7 @@ public class PlayerCollision : MonoBehaviour
         {
             AddTailSegment();
             Destroy(collision.gameObject);                        //destroy food objects on collision 
+                    
         }
         else if (collision.gameObject.CompareTag("Boundary"))
         {
@@ -33,7 +35,8 @@ public class PlayerCollision : MonoBehaviour
         tailSegments[tailSegments.Count - 1].transform.position;
         
         GameObject newTailSegment = Instantiate(tailPrefab, newPosition, Quaternion.identity, tailParent);
-        tailSegments.Add(newTailSegment);   
+        tailSegments.Add(newTailSegment);
+        hasTail = true;
     }
 
 
@@ -41,12 +44,14 @@ public class PlayerCollision : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        hasTail = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         lastMoveDirection = rb.velocity.normalized;                //define last movement direction
+        
     }
 
     void BounceOffBoundary()                                       //reverse last movement direction on collision with arena boundary 

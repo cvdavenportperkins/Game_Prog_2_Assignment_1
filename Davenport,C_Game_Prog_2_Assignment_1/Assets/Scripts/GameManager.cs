@@ -15,12 +15,12 @@ public class GameManager : MonoBehaviour
     public float gameTime = 45f;
     public int points;
     public GameObject foodPrefab;                        //set food prefab variable
-    public float spawnInterval = 3f;                     //set spawn interval variable
+    public float spawnInterval = 2f;                     //set spawn interval variable
     public float timer;                                  //set time variable
     private List<GameObject> foodInstances = new List<GameObject>();  //set List object to count food instances
     public GameObject arena;
     private CircleCollider2D arenaCollider;
-    public int maxFoodInstances = 4;
+    public int maxFoodInstances = 3;
     
 
 
@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
             timer = 0;                             //Reset timer
         }
 
-        if (foodInstances.Count >= 10)              //If food instances reach 10, game over
+        if (foodInstances.Count >= 4)              //If food instances reach 10, game over
         {
             gameOverText.text = "Game Over";
             gameOverText.gameObject.SetActive(true);
@@ -104,22 +104,17 @@ public class GameManager : MonoBehaviour
         }
     void SpawnFood()
     {
+        Vector2 foodPosition = new Vector2(Random.Range(-8f, 8f), Random.Range(-8f, 8f)); // Set random food spawn position
 
+        GameObject newFood = Instantiate(foodPrefab, foodPosition, Quaternion.identity);    //instantiate food prefab 
+        
         Bounds bounds = arenaCollider.bounds;           //declare spawn bounds within arena collider boundary
-        Vector2 foodPosition;
-
-        do
-        {
-
-            foodPosition = new Vector2(Random.Range(bounds.min.x + 1, bounds.max.x - 1), Random.Range(bounds.min.y + 1, bounds.max.y - 1));   //set random food spawn position within boundary
-        } while (!arenaCollider.OverlapPoint(foodPosition));
-
-
-        GameObject newFood = Instantiate(foodPrefab, foodPosition, Quaternion.identity);    //instantiate food prefab  
+                
+        newFood.transform.SetParent(arena.transform, false); // Set the parent after instantiation
 
         foodInstances.Add(newFood);                                                         //add new food instance to list object
 
-        StartCoroutine(DestroyFoodAfterTime(newFood, 7f));                //attempt to make food profabs expire after set interval (does not work)
+        StartCoroutine(DestroyFoodAfterTime(newFood, 5f));                //attempt to make food profabs expire after set interval (does not work)
     }
 
     IEnumerator DestroyFoodAfterTime(GameObject food, float delay)        //set timer to despawn food Prefabs
