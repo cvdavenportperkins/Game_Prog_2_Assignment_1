@@ -14,13 +14,16 @@ public class PlayerCollision : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 lastMoveDirection;
 
-    void OnTrigger2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Food"))              //check for collision with food prefab
         {
             AddTailSegment();
             Destroy(collision.gameObject);                        //destroy food objects on collision 
-
+        }
+        else if (collision.gameObject.CompareTag("Boundary"))
+        {
+            BounceOffBoundary();                                  //bounce back on boundary collision
         }
     }
 
@@ -43,12 +46,13 @@ public class PlayerCollision : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        lastMoveDirection = rb.velocity.normalized;
+        lastMoveDirection = rb.velocity.normalized;                //define last movement direction
     }
 
-    void BounceOffBoundary()
+    void BounceOffBoundary()                                       //reverse last movement direction on collision with arena boundary 
     {
         rb.velocity = -lastMoveDirection * rb.velocity.magnitude;
         transform.position += (Vector3)(-lastMoveDirection * bounceBackDistance);
+        
     }
 }
