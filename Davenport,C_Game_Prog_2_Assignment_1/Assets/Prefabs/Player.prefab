@@ -102,7 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   vel: {x: 0, y: 0}
-  playerCollision: {fileID: 0}
+  playerCollision: {fileID: 3706360024185929487, guid: 609520ceace16104aa892404b346ae51, type: 3}
 --- !u!58 &9112829432302577024
 CircleCollider2D:
   m_ObjectHideFlags: 0

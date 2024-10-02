@@ -57,10 +57,13 @@ public class GameManager : MonoBehaviour
 
         timer += Time.deltaTime;                   //set timer update interval
 
+        Debug.Log("D");
         if (timer >= spawnInterval)                //if timer exceeded spawnInterval
         {
+            Debug.Log("C");
             if (foodInstances.Count < maxFoodInstances)           //check food instances
             {
+                Debug.Log("B");
                 SpawnFood();                       //Spawn food
             }
 
@@ -104,13 +107,14 @@ public class GameManager : MonoBehaviour
         }
     void SpawnFood()
     {
-        Vector2 foodPosition = new Vector2(Random.Range(-8f, 8f), Random.Range(-8f, 8f)); // Set random food spawn position
+        Debug.Log("SpawnFood");
+        Vector2 foodPosition = new Vector2(Random.Range(-8f, 8f), Random.Range(-5f, 5f)); // Set random food spawn position
 
         GameObject newFood = Instantiate(foodPrefab, foodPosition, Quaternion.identity);    //instantiate food prefab 
         
         Bounds bounds = arenaCollider.bounds;           //declare spawn bounds within arena collider boundary
                 
-        newFood.transform.SetParent(arena.transform, false); // Set the parent after instantiation
+        newFood.transform.SetParent(arena.transform); // Set the parent after instantiation
 
         foodInstances.Add(newFood);                                                         //add new food instance to list object
 
@@ -123,8 +127,8 @@ public class GameManager : MonoBehaviour
         if (foodInstances.Contains(food))
         {
             foodInstances.Remove(food);
-
-            Destroy(food);
+            Debug.Log("Despawn");
+            //Destroy(food);
         }
     }
 
